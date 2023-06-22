@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
+import { ProductListComponent } from "src/app/product-list/product-list.component";
 
 @Component({
   selector: 'wss-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MenubarModule],
+  imports: [CommonModule, RouterOutlet, MenubarModule, ProductListComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

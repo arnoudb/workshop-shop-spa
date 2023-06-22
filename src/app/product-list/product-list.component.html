@@ -1,0 +1,9 @@
+<p>product-list works!</p>
+
+<div *ngFor="let product of productListFacade.products$ | async">
+  <span>{{product.name}}</span>
+</div>
+
+<div *ngIf="productListFacade.productsPending$ | async">pending...</div>
+
+

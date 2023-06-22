@@ -4,9 +4,11 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 
 import { provideEffects } from '@ngrx/effects';
-import { provideStore } from '@ngrx/store';
+import { provideStore, provideState } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { routes } from './app.routes';
+import { ProductEffects } from "src/app/product-store/product.effects";
+import { productFeature } from "src/app/product-store/product.reducer";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideStore(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects(),
+    provideEffects([ProductEffects]),
+    provideState(productFeature),
     importProvidersFrom(HttpClientModule),
   ]
 };
