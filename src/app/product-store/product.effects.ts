@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProductActions } from 'src/app/product-store/product.actions';
 import { ProductsService } from "src/app/core/services/products.service";
-import { concatMap } from "rxjs";
+import { concatMap, map, catchError, of } from "rxjs";
 
 @Injectable()
 export class ProductEffects {
@@ -17,7 +17,7 @@ export class ProductEffects {
       ofType(ProductActions.loadProducts),
       concatMap(() => this.productsService.getProducts()),
       map(products => ProductActions.loadProductsSuccess({products: products.data})),
-      //catchError(error => of(ProductActions.loadProductsFailure({error}))));
+      catchError((error:Error) => of(ProductActions.loadProductsFailure(error))),
     );
   });
 }

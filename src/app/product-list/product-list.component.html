@@ -5,5 +5,6 @@
 </div>
 
 <div *ngIf="productListFacade.productsPending$ | async">pending...</div>
+<div *ngIf="productListFacade.productsError$ | async as error">{{ error | json }}</div>
 
 

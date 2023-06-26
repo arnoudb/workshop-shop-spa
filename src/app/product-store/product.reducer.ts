@@ -5,6 +5,7 @@ import { ProductState } from "src/app/product-store/product.state";
 export const productInitialState: ProductState = {
   products: [],
   productsPending: false,
+  productsError: null,
 };
 
 export const productFeature = createFeature({
@@ -13,12 +14,17 @@ export const productFeature = createFeature({
     productInitialState,
     on(ProductActions.loadProducts, (state) => ({
       ...state,
-      itemsPending: true,
+      productsPending: true,
     })),
     on(ProductActions.loadProductsSuccess, (state, { products }) => ({
       ...state,
       products,
-      itemsPending: false,
+      productsPending: false,
+    })),
+    on(ProductActions.loadProductsFailure, (state, productsError) => ({
+      ...state,
+      productsPending: false,
+      productsError,
     }))
   ),
 });
@@ -29,5 +35,6 @@ export const {
   selectProductState,
   selectProducts,
   selectProductsPending,
+  selectProductsError,
 } = productFeature;
 
